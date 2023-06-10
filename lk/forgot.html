@@ -24,7 +24,6 @@
     <div class="loader"><span>HOMS</span></div>
   </div>
 </div>
-
 <div class="account-pages my-5 pt-sm-5">
   <div class="container">
     <div class="row justify-content-center">
@@ -33,59 +32,35 @@
           <div class="bg-primary bg-soft">
             <div class="row">
               <div class="col-12"
-                   style="background: url(img/profile-img.png) no-repeat; background-size:auto 100%; background-position: right;">
-                <div class="text-primary p-4"><h5 class="text-primary">Добро пожаловать!</h5>
-                  <p>Войдите в систему для работы.</p>
+                   style="background: url(/i/assets/images/profile-img.png) no-repeat; background-size:auto 100%; background-position: right;">
+                <div class="text-primary p-4"><h5 class="text-primary">Восстановление пароля</h5>
+                  <p>&nbsp;</p>
                 </div>
               </div>
             </div>
           </div>
           <div class="card-body pt-0">
-            <div class="auth-logo"><a href="" class="auth-logo-dark">
+            <div class="auth-logo"><a href="https://sitefactory.ml/" class="auth-logo-dark">
               <div class="avatar-md profile-user-wid mb-4"><span class="avatar-title rounded-circle"> <img
-                src="img/logo-w-s.svg" alt="" class="rounded-circle" height="50"> </span>
-              </div>
+                src="./forgot_files/logo-w-s.svg" alt="" class="rounded-circle" height="50"> </span></div>
             </a></div>
             <div class="p-2">
+              <div class="alert alert-primary mb-4" role="alert"> Введите ваш email, на него придет ссылка для
+                восстановления пароля.
+              </div>
               <form class="form-horizontal" method="post">
-                <div class="mb-3"><label for="login" class="form-label">Логин</label>
-                  <input type="text"
-                         name="login"
-                         value=""
-                         class="form-control"
-                         id="login"
-                         placeholder="Ваш логин в системе"
-                  >
-                </div>
-                <div class="mb-3"><label class="form-label">Пароль</label>
-                  <div class="input-group auth-pass-inputgroup">
-                    <input type="password" name="pwd"
-                           class="form-control"
-                           placeholder="Введите пароль"
-                           aria-label="Password"
-                           aria-describedby="password-addon"
-                    >
-                    <button class="btn btn-light " type="button" id="password-addon"><i
-                      class="mdi mdi-eye-outline"></i></button>
-                  </div>
+                <div class="mb-3"><label for="email" class="form-label">Email</label>
+                  <input type="text" name="email" class="form-control" id="email" placeholder="Ваш email">
                 </div>
                 <input type="hidden" name="is_login" value="1">
                 <div class="mt-3 d-grid">
-                  <button class="btn btn-primary waves-effect waves-light" type="submit">Войти
-                  </button>
+                  <button class="btn btn-primary waves-effect waves-light" type="submit">Восстановить</button>
                 </div>
-                <div class="mt-4 text-center">
-                  <a href="forgot.html" class="text-muted"> <i class="mdi mdi-lock me-1"></i>
-                    Забыли пароль?</a>
+                <div class="mt-4 text-center"><a href="login.html" class="text-muted">
+                  <i class="mdi mdi-lock me-1"></i> Авторизоваться</a>
                 </div>
               </form>
             </div>
-          </div>
-        </div>
-        <div class="mt-5 text-center">
-          <div>
-            <p>Еще нет аккаунта? <a href="reg.html" class="fw-medium text-primary">
-              Зарегистрироваться</a></p>
           </div>
         </div>
       </div>
@@ -100,6 +75,10 @@
 <script src="js/simplebar.min.js"></script>
 <script src="js/waves.min.js"></script>
 <script src="js/toastr.min.js"></script>
+<script src="js/toastr.init.js"></script>
+<script src="js/jquery.inputmask.bundle.min.js"></script>
+<script src="js/form-mask.init.js"></script>
+
 <script src="js/app.js"></script>
 </body>
 </html>
