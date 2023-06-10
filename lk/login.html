@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<script type="text/javascript"
+        src="chrome-extension://ffljdddodmkedhkcjhpmdajhjdbkogke/js/datalayer-checker.js"></script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Заголовок по умолчанию</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/icons.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/msg.css">
+    <link rel="stylesheet" href="css/toastr.min.css">
+    <script>
+        window.SBX_dlc = window.SBX_dlc || {}
+        window.SBX_dlc.settings = JSON.parse('{"consoleLog":false,"eventColors":true,"eventCustomColors":{"custom1":"","custom2":"","custom3":""},"gtmInjectId":"","gtmInjectRule":"","preventDefault":false,"jsonDefaultViewMode":false}')
+    </script>
+</head>
+<body>
+<div id="preloader" style="display: none;">
+    <div class="clear-loader d-flex align-items-center justify-content-center">
+        <div class="loader"><span>HOMS</span></div>
+    </div>
+</div>
+
+<div class="account-pages my-5 pt-sm-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="card overflow-hidden">
+                    <div class="bg-primary bg-soft">
+                        <div class="row">
+                            <div class="col-12"
+                                 style="background: url(img/profile-img.png) no-repeat; background-size:auto 100%; background-position: right;">
+                                <div class="text-primary p-4"><h5 class="text-primary">Добро пожаловать!</h5>
+                                    <p>Войдите в систему для работы.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="auth-logo"><a href="" class="auth-logo-dark">
+                            <div class="avatar-md profile-user-wid mb-4"><span class="avatar-title rounded-circle"> <img
+                                    src="img/logo-w-s.svg" alt="" class="rounded-circle" height="50"> </span>
+                            </div>
+                        </a></div>
+                        <div class="p-2">
+                            <form class="form-horizontal" method="post">
+                                <div class="mb-3"><label for="login" class="form-label">Логин</label>
+                                    <input type="text"
+                                           name="login"
+                                           value=""
+                                           class="form-control"
+                                           id="login"
+                                           placeholder="Ваш логин в системе"
+                                    >
+                                </div>
+                                <div class="mb-3"><label class="form-label">Пароль</label>
+                                    <div class="input-group auth-pass-inputgroup">
+                                        <input type="password" name="pwd"
+                                               class="form-control"
+                                               placeholder="Введите пароль"
+                                               aria-label="Password"
+                                               aria-describedby="password-addon"
+                                        >
+                                        <button class="btn btn-light " type="button" id="password-addon"><i
+                                                class="mdi mdi-eye-outline"></i></button>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="is_login" value="1">
+                                <div class="mt-3 d-grid">
+                                    <button class="btn btn-primary waves-effect waves-light" type="submit">Войти
+                                    </button>
+                                </div>
+                                <div class="mt-4 text-center">
+                                    <a href="forgopassword" class="text-muted"> <i class="mdi mdi-lock me-1"></i>
+                                    Забыли пароль?</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 text-center">
+                    <div>
+                        <p>Еще нет аккаунта? <a href="reg.html" class="fw-medium text-primary">
+                        Зарегистрироваться</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/msg.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/metisMenu.min.js"></script>
+<script src="js/simplebar.min.js"></script>
+<script src="js/waves.min.js"></script>
+<script src="js/toastr.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
