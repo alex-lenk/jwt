@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
-import './App.css';
-import LoginForm from "./components/LoginForm";
-import {Context} from "./index";
-import {IUser} from "./models/IUser";
-import UserService from "./services/UserService";
-import {observer} from "mobx-react-lite";
+import {observer} from 'mobx-react-lite';
+import LoginForm from './components/LoginForm';
+import {Context} from './index';
+import {IUser} from './models/IUser';
+import UserService from './services/UserService';
+import Loader from './components/common/Loader';
 
 function App() {
   const {store} = useContext(Context);
@@ -12,9 +12,9 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
-      store.checkAuth()
+      store.checkAuth();
     }
-  }, [])
+  }, [store]);
 
   async function getUsers() {
     try {
@@ -26,29 +26,27 @@ function App() {
   }
 
   if (store.isLoading) {
-    return <div>Загрузка...</div>
-  }
-
-  if (!store.isAuth) {
-    return (
-      <div>
-        <LoginForm/>
-        <button onClick={getUsers}>Получить пользователей</button>
-      </div>
-    );
+    return <Loader/>;
   }
 
   return (
     <div>
-      <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ'}</h1>
-      <h1>{store.user.isActivated ? 'Аккаунт подтвержден по почте' : 'ПОДТВЕРДИТЕ АККАУНТ!!!!'}</h1>
-      <button onClick={() => store.logout()}>Выйти</button>
-      <div>
-        <button onClick={getUsers}>Получить пользователей</button>
+      <div className="account-pages my-5 pt-sm-5 container">
+        {!store.isAuth
+          ? <LoginForm/>
+          : <>
+            <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ'}</h1>
+            <h1>{store.user.isActivated ? 'Аккаунт подтвержден по почте' : 'ПОДТВЕРДИТЕ АККАУНТ!!!!'}</h1>
+            <button onClick={() => store.logout()}>Выйти</button>
+            <div>
+              <button onClick={getUsers}>Получить пользователей</button>
+            </div>
+            {users.map(user =>
+              <div key={user.email}>{user.email}</div>,
+            )}
+          </>
+        }
       </div>
-      {users.map(user =>
-        <div key={user.email}>{user.email}</div>
-      )}
     </div>
   );
 }

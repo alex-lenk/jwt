@@ -1,9 +1,10 @@
-import React, {createContext} from 'react';
+import React, {StrictMode, createContext} from 'react';
 import {createRoot} from 'react-dom/client';
-import './index.css';
+import {BrowserRouter} from 'react-router-dom';
+
+import Store from './store/';
+import './styles/app.scss';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import Store from "./store/";
 
 interface State {
   store: Store,
@@ -13,14 +14,14 @@ export const store = new Store();
 
 export const Context = createContext<State>({
   store,
-})
+});
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  <StrictMode>
     <Context.Provider value={{store}}>
-      <App/>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
     </Context.Provider>
-  </React.StrictMode>
+  </StrictMode>,
 );
-
-reportWebVitals();
