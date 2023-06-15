@@ -2,19 +2,21 @@
 src
 ├── controllers
 │   ├── hotelController.ts
+│   ├── loginController.ts
 ├── middlewares
 │   ├── authMiddleware.ts
 ├── models
 │   ├── Hotel.ts
 ├── routers
 │   ├── hotelRouter.ts
+│   ├── loginRouter.ts
 ├── services
 │   ├── hotelService.ts
 ├── app.ts
 └── server.ts
 ```
 
-Let's go over these:
+### Let's go over these:
 
  - controllers: This is where you handle incoming HTTP requests and send responses.
 
