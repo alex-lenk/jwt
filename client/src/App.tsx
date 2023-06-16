@@ -1,54 +1,21 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {observer} from 'mobx-react-lite';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
-import {Context} from './index';
-import {IUser} from './models/IUser';
-import UserService from './services/UserService';
-import Loader from './components/common/Loader';
+import Main from './components/Main';
+import Help from './components/Help';
+import ProtectedRoute from './components/ProtectedRoute';
 
-function App() {
-  const {store} = useContext(Context);
-  const [users, setUsers] = useState<IUser[]>([]);
-
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      store.checkAuth();
-    }
-  }, [store]);
-
-  async function getUsers() {
-    try {
-      const response = await UserService.fetchUsers();
-      setUsers(response.data);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  if (store.isLoading) {
-    return <Loader/>;
-  }
-
+const App: React.FC = () => {
   return (
-    <div>
-      <div className="account-pages my-5 pt-sm-5 container">
-        {!store.isAuth
-          ? <LoginForm/>
-          : <>
-            <h1>{store.isAuth ? `Пользователь авторизован ${store.user.email}` : 'АВТОРИЗУЙТЕСЬ'}</h1>
-            <h1>{store.user.isActivated ? 'Аккаунт подтвержден по почте' : 'ПОДТВЕРДИТЕ АККАУНТ!!!!'}</h1>
-            <button onClick={() => store.logout()}>Выйти</button>
-            <div>
-              <button onClick={getUsers}>Получить пользователей</button>
-            </div>
-            {users.map(user =>
-              <div key={user.email}>{user.email}</div>,
-            )}
-          </>
-        }
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={ <LoginForm/> }/>
+        <Route path="/*" element={ <ProtectedRoute/> }>
+          <Route path="/main" element={ <Main/> }/>
+          <Route path="/help" element={ <Help/> }/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
-export default observer(App);
+export default App;

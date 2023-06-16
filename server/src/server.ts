@@ -36,7 +36,6 @@ async function start() {
     server.listen(port, () => {
       console.log(`Server is running at http://localhost:${port}/`);
     });
-
   } catch (e) {
     console.log('Error:', e as Error);
     process.exit(1);

@@ -1,27 +1,14 @@
-import React, {StrictMode, createContext} from 'react';
-import {createRoot} from 'react-dom/client';
-import {BrowserRouter} from 'react-router-dom';
-
-import Store from './store/';
-import './styles/app.scss';
+import { StrictMode } from 'react';
+import { render } from 'react-dom';
 import App from './App';
+import Store from './store';
+import { Provider } from 'mobx-react';
 
-interface State {
-  store: Store,
-}
-
-export const store = new Store();
-
-export const Context = createContext<State>({
-  store,
-});
-
-createRoot(document.getElementById('root') as HTMLElement).render(
+render(
   <StrictMode>
-    <Context.Provider value={{store}}>
-      <BrowserRouter>
-        <App/>
-      </BrowserRouter>
-    </Context.Provider>
+    <Provider store={ Store }>
+      <App/>
+    </Provider>
   </StrictMode>,
+  document.getElementById('root'),
 );
