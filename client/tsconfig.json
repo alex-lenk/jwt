@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
     "module": "commonjs",
     "target": "es6",
     "rootDir": "./",
-    "esModuleInterop": true,
+    "baseUrl": "src",
     "lib": [
       "dom",
       "dom.iterable",
@@ -22,6 +23,6 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    ["src"]
   ]
 }
