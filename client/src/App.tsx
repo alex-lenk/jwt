@@ -1,17 +1,67 @@
-import { HelmetProvider } from 'react-helmet-async';
-import { Route, Routes } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import LoginForm from './components/LoginForm';
-import NotFound from './components/NotFound';
+import Loader from './components/common/Loader';
+import { useStores } from './store';
 
 function App() {
+  const {networkStore} = useStores();
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      networkStore.checkAuth();
+    }
+  }, [networkStore]);
+
+  if (networkStore.isLoading) {
+    return <Loader/>;
+  }
+
+  return (
+    <div>
+      <div className="account-pages my-5 pt-sm-5 container">
+        { !networkStore.isAuth
+          ? <LoginForm/>
+          : <>
+            <h1>{ networkStore.isAuth ? `Пользователь авторизован ${ networkStore.user.email }` : 'АВТОРИЗУЙТЕСЬ' }</h1>
+            <h1>{ networkStore.user.isActivated ? 'Аккаунт подтвержден по почте' : 'ПОДТВЕРДИТЕ АККАУНТ!!!!' }</h1>
+            <button onClick={ () => networkStore.logout() }>Выйти</button>
+          </>
+        }
+      </div>
+    </div>
+  );
+}
+
+export default observer(App);
+
+
+/*
+import { FC, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { HelmetProvider } from 'react-helmet-async';
+import { Route, Routes } from 'react-router-dom';
+import { useStores } from './store';
+import { getFromStorage } from './helpers/storage';
+import LoginForm from './components/LoginForm';
+import NotFound from './components/NotFound';
+import ProtectedRoute from './components/ProtectedRoute';
+import Main from './components/Main';
+const App: FC = observer(() => {
+  const {networkStore} = useStores();
+  useEffect(() => {
+    if (getFromStorage('token')) {
+      networkStore.checkAuth();
+    }
+  }, [networkStore]);
   return (
     <div className="container page__content">
       <HelmetProvider>
         <Routes>
-          <Route path="/" element={ <LoginForm/> }/>
+          <Route path="/login" element={ <LoginForm/> }/>
+          <Route path="/" element={ <ProtectedRoute isAuth={ networkStore.isAuth }/> }>
+            <Route index element={ <Main /> }/>
+          </Route>
           <Route path="*" element={ <NotFound/> }/>
         </Routes>
       </HelmetProvider>
@@ -19,68 +69,6 @@ function App() {
       <ToastContainer/>
     </div>
   );
-}
-
-/*
-import { observer } from 'mobx-react-lite';
-import React, { FC, useEffect } from 'react';
-
-import { IUser } from './models/IUser';
-import { useStores } from './store';
-import { getFromStorage } from './helpers/storage';
-const App: FC = observer(() => {
-  const {networkStore} = useStores();
-
-  useEffect(() => {
-    if (getFromStorage('token')) {
-      networkStore.checkAuth();
-    }
-  }, [networkStore]);
-
-  if (networkStore.loginError) {
-    toast.error(networkStore.loginError);
-    return <div>Error:
-      <ToastContainer/>
-    </div>;
-  }
-
-  if (networkStore.isLoading) {
-    return <div className="">Загрузка...</div>;
-  }
-
-  if (!networkStore.isAuth) {
-    return (
-      <div>
-        <LoginForm/>
-      </div>
-    );
-  }
-
-  return (
-    <div className="App">
-      <h1>
-        { networkStore.isAuth
-          ? `Пользователь авторизован ${ networkStore.user.email }`
-          : 'АВТОРИЗУЙТЕСЬ!' }
-      </h1>
-      <h2>
-        {
-          networkStore.user.isActivated
-            ? 'Аккаунт подтвержден по почте'
-            : 'ПОТВЕРДИТЕ АККАУНТ'
-        }
-      </h2>
-      <button onClick={ () => networkStore.logout() }>Выйти</button>
-      <div>
-        { networkStore.users.map((user: IUser) => {
-          return <div key={ user._id }>{ user._id } { user.email }</div>;
-        }) }
-      </div>
-
-      <ToastContainer/>
-    </div>
-  );
 });
-*/
-
 export default App;
+*/

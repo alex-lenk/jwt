@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx';
-import { IUser } from '../models/IUser';
-import { getFromStorage, removeFromStorage, saveToStorage } from '../helpers/storage';
-import AuthService from '../services/AuthService';
 import axios from 'axios';
-import { AuthResponse } from '../models/response/AuthResponse';
+import { IUser } from '../models/IUser';
 import { API_URL } from '../http';
+import AuthService from '../services/AuthService';
+import { AuthResponse } from '../models/response/AuthResponse';
+import { getFromStorage, removeFromStorage, saveToStorage } from '../helpers/storage';
 
 class NetworkStore {
   user = {} as IUser;

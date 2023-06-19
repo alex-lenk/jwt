@@ -6,6 +6,7 @@ const LoginForm: FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const {networkStore} = useStores();
+
   return (
     <div>
       <input

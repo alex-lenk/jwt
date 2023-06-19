@@ -1,3 +1,22 @@
+import { Navigate, Route } from 'react-router-dom';
+import { useStores } from '../store';
+
+function PrivateRoute({children, ...rest}: any) {
+  const {networkStore} = useStores();
+
+  return (
+    <Route { ...rest } render={ () => {
+      return networkStore.isAuth === true
+        ? children
+        : <Navigate to="/login"/>;
+    } }/>
+  );
+}
+
+export default PrivateRoute;
+
+
+/*
 import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
@@ -17,3 +36,4 @@ const ProtectedRoute: React.FC = observer(() => {
 });
 
 export default ProtectedRoute;
+*/
