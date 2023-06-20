@@ -1,6 +1,6 @@
-import { AuthResponse } from '../models/response/AuthResponse';
+import type { AxiosResponse } from 'axios';
+import type { AuthResponse } from '../models/response/AuthResponse';
 import $api from '../http';
-import { AxiosResponse } from 'axios';
 
 export default class AuthService {
   static async login(

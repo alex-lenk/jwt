@@ -1,5 +1,5 @@
 import { useStores } from '../store';
-import { IUser } from '../models/IUser';
+import type { IUser } from '../models/IUser';
 
 const Main = () => {
   const {networkStore} = useStores();

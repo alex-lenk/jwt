@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useState } from 'react';
+import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useFormik } from 'formik';

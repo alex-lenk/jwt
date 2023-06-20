@@ -1,9 +1,9 @@
 import { makeAutoObservable } from 'mobx';
 import axios from 'axios';
-import { IUser } from '../models/IUser';
+import type { IUser } from '../models/IUser';
 import { API_URL } from '../http';
 import AuthService from '../services/AuthService';
-import { AuthResponse } from '../models/response/AuthResponse';
+import type { AuthResponse } from '../models/response/AuthResponse';
 import { getFromStorage, removeFromStorage, saveToStorage } from '../helpers/storage';
 
 class NetworkStore {
