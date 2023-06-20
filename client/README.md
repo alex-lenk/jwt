@@ -4,17 +4,30 @@ src
 ├── assets/
 ├── components/
 │   ├── common/
-│   │   ├──Loader.tsx
+│   │   ├── Loader.tsx
+│   ├── NotFound/
+│   │   └── index.tsx
+│   ├── ErrorPage.tsx
 │   ├── Help.tsx
 │   ├── LoginForm.tsx
-│   ├── ProtectedRoute.tsx
+│   ├── Main.tsx
+│   └── ProtectedRoute.tsx
+├── ErrorBoundary/
+│   └── index.tsx
+├── helpers/
+│   └── storage.ts
+├── http/
+│   └── index.ts
 ├── models/
-│   ├── Hotel.ts
+│   ├── response/
+│   │   └── AuthResponse.ts
+│   └── IUser.ts
 ├── services/
-│   ├── hotelService.ts
+│   ├── AuthService.ts
+│   └── UserService.ts
 ├── store/
-│   ├── hotelRouter.ts
-│   ├── loginRouter.ts
+│   ├── index.ts
+│   └── networkStore.ts
 ├── App.tsx
 └── index.tsx
 ```
