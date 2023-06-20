@@ -3,7 +3,7 @@ import Routes from './Routes';
 
 const App = observer(() => {
   return (
-    <div className="App">
+    <div className="account-pages my-5 pt-sm-5 container">
       <Routes/>
     </div>
   );
