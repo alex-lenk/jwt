@@ -18,7 +18,6 @@ const Main = () => {
           : 'ПОТВЕРДИТЕ АККАУНТ'
       }
     </h2>
-    <button onClick={ () => networkStore.logout() }>Выйти</button>
     <div>
       { networkStore.users.map((user: IUser) => {
         return <div key={ user._id }>{ user._id } { user.email }</div>;

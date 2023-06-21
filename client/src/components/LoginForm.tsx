@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useStores } from '../store';
 import logo from '../assets/img/logo-w-s.svg';
+import { PAGE_NAMES, ROUTES_LINKS } from './routesLinks';
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -40,7 +41,7 @@ const LoginForm: FC = () => {
       </div>
 
       <div className="card-body pt-0">
-        <Link to="/" className="auth-logo avatar-md profile-user-wid mb-3 avatar-title rounded-circle">
+        <Link to={ ROUTES_LINKS.MAIN } className="auth-logo avatar-md profile-user-wid mb-3 avatar-title rounded-circle">
           <img src={ logo } alt="" className="rounded-circle"/>
         </Link>
 
@@ -81,17 +82,12 @@ const LoginForm: FC = () => {
           </div>
 
           <div className="pt-2 d-grid">
-            <button
-              className="btn-primary btn-lg btn waves-effect waves-light"
-              type="submit"
-            >
-              Войти
-            </button>
+            <button className="btn-primary btn-lg btn waves-effect waves-light" type="submit">Войти</button>
           </div>
 
           <div className="mt-4 text-center">
-            <Link to="/forgot" className="text-muted">
-              <i className="mdi mdi-lock me-1"></i> Забыли пароль?
+            <Link to={ ROUTES_LINKS.FORGOT } className="text-muted">
+              <i className="mdi mdi-lock me-1"></i> { PAGE_NAMES.FORGOT }
             </Link>
           </div>
         </form>

@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+import { PAGE_NAMES, ROUTES_LINKS } from './routesLinks';
 import logo from '../assets/img/logo-w-s.svg';
 
 const Forgot: FC = () => {
@@ -11,12 +12,12 @@ const Forgot: FC = () => {
       </div>
 
       <div className="card-body pt-0">
-        <Link to="/" className="auth-logo avatar-md profile-user-wid mb-3 avatar-title rounded-circle">
+        <Link to={ ROUTES_LINKS.MAIN } className="auth-logo avatar-md profile-user-wid mb-3 avatar-title rounded-circle">
           <img src={ logo } alt="" className="rounded-circle"/>
         </Link>
 
-        <div className="alert alert-primary mb-4" role="alert"> Введите ваш email, на него придет ссылка для
-          восстановления пароля.
+        <div className="alert alert-primary mb-4" role="alert">
+          Введите ваш email, на него придет ссылка для восстановления пароля.
         </div>
 
         <form className="form-horizontal">
@@ -30,8 +31,8 @@ const Forgot: FC = () => {
           </div>
 
           <div className="mt-4 text-center">
-            <Link to="/login" className="text-muted">
-              <i className="mdi mdi-lock me-1"></i> Авторизоваться
+            <Link to={ ROUTES_LINKS.LOGIN } className="text-muted">
+              <i className="mdi mdi-lock me-1"></i> { PAGE_NAMES.AUTH }
             </Link>
           </div>
         </form>
