@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import NavbarHeader from './NavbarHeader';
 import VerticalMenu from './VerticalMenu';
 
-const Layout = () => {
+const PrivateLayout = () => {
   return (
     <>
       <NavbarHeader/>
@@ -18,4 +18,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default PrivateLayout;

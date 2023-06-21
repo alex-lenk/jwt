@@ -1,7 +1,6 @@
 import  { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
-// @ts-ignore
+import { ROUTES_LINKS } from '../routesLinks';
 import cls from './notfound.module.scss';
 
 const NotFound = () => {
@@ -17,7 +16,7 @@ const NotFound = () => {
 
           <h1 className={ cls.notfound_title }>Страница не&nbsp;найдена</h1>
 
-          <Link to="/" className="btn__primary btn">На главную</Link>
+          <Link to={ ROUTES_LINKS.MAIN } className="btn__primary btn">На главную</Link>
         </div>
       </section>
     </div>
