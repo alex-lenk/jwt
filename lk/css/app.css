@@ -1282,7 +1282,7 @@ body[data-layout-size=boxed] {
   background-color: #ebebf4;
 }
 
-body[data-layout-size=boxed] #layout-wrapper {
+body[data-layout-size=boxed] #root {
   background-color: #f8f8fb;
   max-width: 1300px;
   margin: 0 auto;
@@ -1304,7 +1304,7 @@ body[data-layout-size=boxed].vertical-collpsed .footer {
   max-width: calc(1300px - 70px);
 }
 
-body[data-layout=horizontal][data-layout-size=boxed] #layout-wrapper, body[data-layout=horizontal][data-layout-size=boxed] #page-topbar, body[data-layout=horizontal][data-layout-size=boxed] .footer {
+body[data-layout=horizontal][data-layout-size=boxed] #root, body[data-layout=horizontal][data-layout-size=boxed] #page-topbar, body[data-layout=horizontal][data-layout-size=boxed] .footer {
   max-width: 100%;
 }
 
