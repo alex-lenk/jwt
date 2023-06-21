@@ -11,26 +11,26 @@ import Layout from './components/Layout';
 const App = observer(() => {
   const PrivateRoute = observer(({ children }: { children: JSX.Element }) => {
     const { networkStore } = useStores();
-    return networkStore.isAuth ? children : <Navigate to="/login" replace />;
+    return networkStore.isAuth ? children : <Navigate to="/login" replace/>;
   });
 
   const PublicRoute = observer(({ children }: { children: JSX.Element }) => {
     const { networkStore } = useStores();
-    return networkStore.isAuth ? <Navigate to="/" replace /> : children;
+    return networkStore.isAuth
+      ? <Navigate to="/" replace/>
+      : <div className="account-pages my-5 pt-sm-5 container">{ children }</div>;
   });
 
   return (
-    <div className="account-pages my-5 pt-sm-5 container">
-      <Routes>
-        <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>} >
-          <Route index element={<Main />} />
-          <Route path="/help" element={<Help />} />
-        </Route>
-        <Route path="/login" element={<PublicRoute><LoginForm /></PublicRoute>} />
-        <Route path="/forgot" element={<PublicRoute><Forgot /></PublicRoute>} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={ <PrivateRoute><Layout/></PrivateRoute> }>
+        <Route index element={ <Main/> }/>
+        <Route path="/help" element={ <Help/> }/>
+      </Route>
+      <Route path="/login" element={ <PublicRoute><LoginForm/></PublicRoute> }/>
+      <Route path="/forgot" element={ <PublicRoute><Forgot/></PublicRoute> }/>
+      <Route path="*" element={ <NotFound/> }/>
+    </Routes>
   );
 });
 
