@@ -11,6 +11,7 @@ class NetworkStore {
   isAuth = false;
   isLoading = false;
   users: IUser[] = [];
+  menuIsActive = false; // new observable for the menu active state
 
   constructor() {
     makeAutoObservable(this);
@@ -21,25 +22,29 @@ class NetworkStore {
   loginInProgress = false;
   loginError = '';
 
+  toggleMenu() {
+    this.menuIsActive = !this.menuIsActive;
+  }
+
   /*
    setLoading = (isLoading: boolean) => {
-     this.isLoading = isLoading;
+   this.isLoading = isLoading;
    }
-      */
+   */
   setLoading(bool: boolean) {
     this.isLoading = bool;
   }
 
   /*
-    async fetchUsers() {
-      try {
-        const response = await UserService.fetchUsers();
-        this.users = response.data;
-      } catch (error) {
-        console.error('Failed to fetch users:', error);
-      }
-    }
-  */
+   async fetchUsers() {
+   try {
+   const response = await UserService.fetchUsers();
+   this.users = response.data;
+   } catch (error) {
+   console.error('Failed to fetch users:', error);
+   }
+   }
+   */
 
   setAuth(bool: boolean) {
     this.isAuth = bool;
