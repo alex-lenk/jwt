@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { useStores } from './store';
 import { ROUTES_LINKS } from './components/routesLinks';
 import LoginForm from './components/LoginForm';
@@ -9,6 +10,8 @@ import Help from './components/Help';
 import NotFound from './components/NotFound';
 import PrivateLayout from './components/PrivateLayout';
 import PublicLayout from './components/PublicLayout';
+import Profile from './components/Profile';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const { networkStore } = useStores();
@@ -22,17 +25,21 @@ const App = () => {
   });
 
   return (
-    <Routes>
-      <Route path={ ROUTES_LINKS.MAIN } element={ <PrivateRoute/> }>
-        <Route index element={ <Main/> }/>
-        <Route path={ ROUTES_LINKS.HELP } element={ <Help/> }/>
-      </Route>
-      <Route path={ ROUTES_LINKS.MAIN } element={<PublicRoute/>}>
-        <Route path={ ROUTES_LINKS.LOGIN } element={ <LoginForm/> }/>
-        <Route path={ ROUTES_LINKS.FORGOT } element={ <Forgot/> }/>
-      </Route>
-      <Route path="*" element={ <NotFound/> }/>
-    </Routes>
+    <>
+      <Routes>
+        <Route path={ ROUTES_LINKS.MAIN } element={ <PrivateRoute/> }>
+          <Route index element={ <Main/> }/>
+          <Route path={ ROUTES_LINKS.HELP } element={ <Help/> }/>
+          <Route path={ ROUTES_LINKS.PROFILE } element={ <Profile/> }/>
+        </Route>
+        <Route path={ ROUTES_LINKS.MAIN } element={ <PublicRoute/> }>
+          <Route path={ ROUTES_LINKS.LOGIN } element={ <LoginForm/> }/>
+          <Route path={ ROUTES_LINKS.FORGOT } element={ <Forgot/> }/>
+        </Route>
+        <Route path="*" element={ <NotFound/> }/>
+      </Routes>
+      <ToastContainer/>
+    </>
   );
 };
 

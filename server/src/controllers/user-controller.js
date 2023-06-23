@@ -1,11 +1,10 @@
-const userService = require('../service/user-service');
 const { validationResult } = require('express-validator');
+const userService = require('../service/user-service');
 const ApiError = require('../exceptions/api-error');
 
 class UserController {
   async registration(req, res, next) {
     try {
-
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return next(ApiError.BadRequest(
@@ -13,7 +12,6 @@ class UserController {
           errors.array(),
         ));
       }
-
 
       // деструктурируем поля из запроса
       const { email, password } = req.body;
@@ -106,6 +104,16 @@ class UserController {
     try {
       const users = await userService.getAllUsers();
       return res.json(users);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async updateProfile(req, res, next) {
+    try {
+      const { email, name, password } = req.body;
+      const userData = await userService.updateProfile(req.user.id, email, name, password);
+      return res.json(userData);
     } catch (error) {
       next(error);
     }

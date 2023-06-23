@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const tokenModel = require('../models/token-model');
 
-
 class TokenService {
   generateTokens(payload) {
     const accessToken = jwt.sign(
@@ -21,27 +20,25 @@ class TokenService {
     };
   }
 
-  valiadateAccessToken(token) {
+  validateAccessToken(token) {
     try {
-      const userData = jwt.verify(
+      return jwt.verify(
         token,
         process.env.JWT_ACCESS_SECRET,
       );
-      return userData;
     } catch (error) {
       return null;
     }
   }
 
-  valiadateRefreshToken(token) {
+  validateRefreshToken(token) {
     try {
-      const userData = jwt.verify(
+      return jwt.verify(
         token,
         process.env.JWT_REFRESH_SECRET,
       );
-      return userData;
     } catch (error) {
-
+      console.log('validateRefreshToken error', error);
     }
   }
 

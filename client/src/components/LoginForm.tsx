@@ -9,14 +9,14 @@ import { PAGE_NAMES, ROUTES_LINKS } from './routesLinks';
 
 const validationSchema = Yup.object({
   email: Yup.string()
-    .email('Invalid email address')
-    .min(7, 'Must be at least 7 characters')
-    .max(32, 'Must be 32 characters or less')
-    .required('Required'),
+    .email('Некорректный email')
+    .min(7, 'Не менее 7 символов')
+    .max(32, 'Не более 32 символов')
+    .required('Обязательный'),
   password: Yup.string()
-    .min(8, 'Must be at least 8 characters')
-    .max(32, 'Must be 32 characters or less')
-    .required('Required'),
+    .min(8, 'Не менее 8 символов')
+    .max(32, 'Не более 32 символов')
+    .required('Обязательный'),
 });
 
 const LoginForm: FC = () => {

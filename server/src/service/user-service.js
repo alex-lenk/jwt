@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 
-
 const UserModel = require('../models/user-model');
 const mailService = require('./mail-service');
 const tokenService = require('./token-service');
@@ -18,7 +17,7 @@ class UserService {
     }
     // хешируем пароль
     const hashPassword = bcrypt.hashSync(password, 3);
-    // создаеми id
+    // создаем id
     const activationLink = uuid.v4();
     // создаем user
     const user = await UserModel.create({
@@ -106,7 +105,7 @@ class UserService {
     if (!refreshToken) {
       throw ApiError.UnauthorizedError();
     }
-    const userData = tokenService.valiadateRefreshToken(refreshToken);
+    const userData = tokenService.validateRefreshToken(refreshToken);
     const tokenFromDb = await tokenService.findToken(
       refreshToken,
     );
@@ -136,6 +135,40 @@ class UserService {
   async getAllUsers() {
     const users = await UserModel.find();
     return users;
+  }
+
+  async updateProfile(userId, email, name, password) {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      throw ApiError.BadRequest('User not found');
+    }
+
+    if (email) {
+      const emailExists = await UserModel.findOne({ email });
+      if (emailExists) {
+        throw ApiError.BadRequest('Email already in use');
+      }
+      user.email = email;
+    }
+
+    if (name) {
+      user.name = name;
+    }
+
+    if (password) {
+      user.password = bcrypt.hashSync(password, 3);
+    }
+
+    await user.save();
+
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+    return {
+      ...tokens,
+      user: userDto,
+    };
   }
 }
 

@@ -3,7 +3,6 @@ export const ROUTES_LINKS = {
   HELP: '/help',
   LOGIN: '/login',
   FORGOT: '/forgot',
-
   PROFILE: '/profile',
 };
 
