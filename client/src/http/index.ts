@@ -11,14 +11,15 @@ const $api = axios.create({
 $api.interceptors.request.use(
   (config: any) => {
     const token = localStorage.getItem('token');
+    // const refreshToken = localStorage.getItem('refreshToken'); // assuming refreshToken is stored in local storage
     if (!config.headers) {
       config.headers = {};
     }
     config.headers.Authorization = `Bearer ${ token }`;
+    // config.headers.Refresh = `Bearer ${ refreshToken }`; // send refresh token with each request
 
     return config;
-  },
-);
+  });
 
 $api.interceptors.response.use(
   (config: any) => {
@@ -31,7 +32,7 @@ $api.interceptors.response.use(
       try {
         const response = await axios.get<AuthResponse>(
           `${ API_URL }/refresh`,
-          {withCredentials: true},
+          { withCredentials: true },
         );
         localStorage.setItem('token', response.data.accessToken);
         originalRequest.headers.Authorization = `Bearer ${ response.data.accessToken }`;

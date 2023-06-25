@@ -39,7 +39,7 @@ const Profile: FC = () => {
         email: email !== networkStore.user.email ? email : undefined,
         password: password ? password : undefined,
       };
-      await networkStore.updateProfile(userUpdates);
+      // await networkStore.updateProfile(userUpdates);
     },
   });
 

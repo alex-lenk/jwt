@@ -49,7 +49,7 @@ export const login = async (req: Request, res: Response) => {
 
   jwt.sign(
     payload,
-    process.env.JWT_ACCESS_SECRET!,
+    process.env.JWT_SECRET!,
     {expiresIn: process.env.JWT_ACCESS_EXPIRES_IN},
     (err, token) => {
       if (err) throw err;

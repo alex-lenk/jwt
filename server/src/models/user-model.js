@@ -7,6 +7,11 @@ const UserSchema = new Schema({
   isActivated: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false },
   activationLink: { type: String },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+    required: true,
+  },
 });
 
 module.exports = model('User', UserSchema);

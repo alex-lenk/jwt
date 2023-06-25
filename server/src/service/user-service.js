@@ -74,7 +74,7 @@ class UserService {
       user.password,
     );
     if (!isPassEquals) {
-      throw ApiError.BadRequest('Геверный пароль');
+      throw ApiError.BadRequest('Неверный пароль');
     }
     // убираем из модели все ненужное
     const userDto = new UserDto(user);

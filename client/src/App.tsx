@@ -12,6 +12,7 @@ import PrivateLayout from './components/PrivateLayout';
 import PublicLayout from './components/PublicLayout';
 import Profile from './components/Profile';
 import 'react-toastify/dist/ReactToastify.css';
+import RegistrationForm from './components/RegistrationForm';
 
 const App = () => {
   const { networkStore } = useStores();
@@ -34,6 +35,7 @@ const App = () => {
         </Route>
         <Route path={ ROUTES_LINKS.MAIN } element={ <PublicRoute/> }>
           <Route path={ ROUTES_LINKS.LOGIN } element={ <LoginForm/> }/>
+          <Route path="/registration" element={ <RegistrationForm/> }/>
           <Route path={ ROUTES_LINKS.FORGOT } element={ <Forgot/> }/>
         </Route>
         <Route path="*" element={ <NotFound/> }/>
