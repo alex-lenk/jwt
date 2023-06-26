@@ -11,13 +11,7 @@ const $api = axios.create({
 $api.interceptors.request.use(
   (config: any) => {
     const token = localStorage.getItem('token');
-    // const refreshToken = localStorage.getItem('refreshToken'); // assuming refreshToken is stored in local storage
-    if (!config.headers) {
-      config.headers = {};
-    }
-    config.headers.Authorization = `Bearer ${ token }`;
-    // config.headers.Refresh = `Bearer ${ refreshToken }`; // send refresh token with each request
-
+    config.headers.Authorization = `Bearer ${ localStorage.getItem('token') }`;
     return config;
   });
 
@@ -27,7 +21,7 @@ $api.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._isRetry) {
+    if (error.response.status === 401 && error.config && !error.config._isRetry) {
       originalRequest._isRetry = true;
       try {
         const response = await axios.get<AuthResponse>(
@@ -35,8 +29,7 @@ $api.interceptors.response.use(
           { withCredentials: true },
         );
         localStorage.setItem('token', response.data.accessToken);
-        originalRequest.headers.Authorization = `Bearer ${ response.data.accessToken }`;
-        return axios(originalRequest);
+        return $api.request(originalRequest);
       } catch (e) {
         console.log('НЕ АВТОРИЗОВАН');
       }

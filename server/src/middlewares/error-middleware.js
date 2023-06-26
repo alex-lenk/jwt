@@ -1,6 +1,6 @@
 const ApiError = require('../exceptions/api-error');
 
-const errorMiddleware = (err, req, res) => {
+module.exports = function (err, req, res) {
   console.log(err);
   if (err instanceof ApiError) {
     return res.status(err.status).json({
@@ -12,5 +12,3 @@ const errorMiddleware = (err, req, res) => {
     message: 'Непредвиденная ошибка',
   });
 };
-
-module.exports = errorMiddleware;
