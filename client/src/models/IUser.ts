@@ -1,6 +1,6 @@
 export interface IUser {
   email: string;
-  name: string;
+  displayName: string;
   isActivated: boolean;
   isAdmin: boolean;
   _id: string;

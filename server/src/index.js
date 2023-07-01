@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const { expressjwt: jwt } = require('express-jwt');
 
 const router = require('./router/');
 const errorMiddleware = require('./middlewares/error-middleware');
@@ -21,14 +20,6 @@ app.use(cors({
   credentials: true,
   origin: process.env.CLIENT_URL,
 }));
-/*
-app.use(jwt({
-    secret: process.env.JWT_SECRET,
-    algorithms: ['HS256'],
-  }).unless({
-    path: ['/api/login', '/api/register'],
-  }),
-);*/
 
 app.use('/api', router);
 

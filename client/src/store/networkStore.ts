@@ -5,6 +5,7 @@ import { API_URL } from '../http';
 import AuthService from '../services/AuthService';
 import type { AuthResponse } from '../models/response/AuthResponse';
 import { getFromStorage, removeFromStorage, saveToStorage } from '../helpers/storage';
+import { toast } from 'react-toastify';
 
 class NetworkStore {
   user = {} as IUser;
@@ -15,7 +16,7 @@ class NetworkStore {
 
   constructor() {
     makeAutoObservable(this);
-    this.checkAuth();
+    //this.checkAuth();
   }
 
   loginInProgress = false;
@@ -64,15 +65,17 @@ class NetworkStore {
     }
   }
 
-  async registration(email: string, password: string) {
+  async registration(userCredentials: object) {
     try {
-      const response = await AuthService.registration(email, password);
-      console.log(response);
-      localStorage.setItem('token', response.data.accessToken);
-      this.setAuth(true);
+      const response = await AuthService.registration(userCredentials);
       this.setUser(response.data.user);
+      toast.success('Пользователь успешно зарегистрирован');
     } catch (e: any) {
-      console.log(e.response?.data?.message);
+      console.error(e);
+      const errorMessage = e?.response?.data?.message || e?.message || 'Произошла неизвестная ошибка';
+      console.log(errorMessage);
+      toast.error('Пользователь существует');
+      throw e;
     }
   }
 

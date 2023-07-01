@@ -25,7 +25,7 @@ const Profile: FC = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: networkStore.user.name,
+      name: networkStore.user.displayName,
       email: networkStore.user.email,
       password: '',
       confirmPassword: '',
@@ -35,7 +35,7 @@ const Profile: FC = () => {
       console.log('onSubmit');
       const { name, email, password } = values;
       const userUpdates = {
-        name: name !== networkStore.user.name ? name : undefined,
+        name: name !== networkStore.user.displayName ? name : undefined,
         email: email !== networkStore.user.email ? email : undefined,
         password: password ? password : undefined,
       };
