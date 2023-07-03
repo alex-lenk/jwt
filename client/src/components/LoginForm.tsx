@@ -1,99 +1,128 @@
-import type { FC } from 'react';
-import { Link } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { useStores } from '../store';
-import logo from '../assets/img/logo-w-s.svg';
-import { PAGE_NAMES, ROUTES_LINKS } from './routesLinks';
+import React from 'react';
+import { observer } from 'mobx-react';
+// import { Formik, Field, Form, ErrorMessage } from 'formik';
+// import { loginSchema } from '../helpers/validationSchemas';
+// import UserStore from '../store/UserStore';
 
-const validationSchema = Yup.object({
-  email: Yup.string()
-    .email('Некорректный email')
-    .min(7, 'Не менее 7 символов')
-    .max(32, 'Не более 32 символов')
-    .required('Обязательный'),
-  password: Yup.string()
-    .min(8, 'Не менее 8 символов')
-    .max(32, 'Не более 32 символов')
-    .required('Обязательный'),
-});
+const LoginForm = observer(() => (
+  <div>sss</div>
+/*  <Formik
+    initialValues={ { email: '', password: '' } }
+    validationSchema={ loginSchema }
+    //onSubmit={ (email: string, password: string) => UserStore.login(email, password) }
+  >
+    { ({ errors, touched, isValidating }) => (
+      <Form>
+        <Field type="email" name="email"/>
+        <ErrorMessage name="email" component="div"/>
+        <Field type="password" name="password"/>
+        <ErrorMessage name="password" component="div"/>
+        <button type="submit">Submit</button>
+      </Form>
+    ) }
+  </Formik>*/
+));
 
-const LoginForm: FC = () => {
-  const {networkStore} = useStores();
+export default LoginForm;
 
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema,
-    onSubmit: (values) => {
-      networkStore.login(values.email, values.password);
-    },
-  });
+/*
+ import type { FC } from 'react';
+ import { Link } from 'react-router-dom';
+ import { observer } from 'mobx-react-lite';
+ import { useFormik } from 'formik';
+ import * as Yup from 'yup';
+ import { useStores } from '../store';
+ import logo from '../assets/img/logo-w-s.svg';
+ import { PAGE_NAMES, ROUTES_LINKS } from './routesLinks';
 
-  return (
-    <div className="m-auto col-md-8 col-lg-6 col-xl-5 card overflow-hidden">
-      <div className="bg-primary bg-soft p-4">
-        <h5 className="text-white">Добро пожаловать!</h5>
-        <p className="text-white">Войдите в систему для работы.</p>
-      </div>
+ const validationSchema = Yup.object({
+ email: Yup.string()
+ .email('Некорректный email')
+ .min(7, 'Не менее 7 символов')
+ .max(32, 'Не более 32 символов')
+ .required('Обязательный'),
+ password: Yup.string()
+ .min(8, 'Не менее 8 символов')
+ .max(32, 'Не более 32 символов')
+ .required('Обязательный'),
+ });
 
-      <div className="card-body pt-0">
-        <Link to={ ROUTES_LINKS.MAIN } className="auth-logo avatar-md profile-user-wid mb-3 avatar-title rounded-circle">
-          <img src={ logo } alt="" className="rounded-circle"/>
-        </Link>
+ const LoginForm: FC = () => {
+ const {networkStore} = useStores();
 
-        <form className="p-2 form-horizontal" onSubmit={ formik.handleSubmit }>
-          <div className="mb-4">
-            <label htmlFor="login" className="form-label visually-hidden-focusable">Логин</label>
-            <input
-              type="email"
-              name="email"
-              className="form-control form-control-lg"
-              id="login"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-              placeholder="Ваш email в системе"
-            />
-            {formik.touched.email && formik.errors.email ? (
-              <div className="invalid-feedback d-block">{formik.errors.email}</div>
-            ) : null}
-          </div>
+ const formik = useFormik({
+ initialValues: {
+ email: '',
+ password: '',
+ },
+ validationSchema,
+ onSubmit: (values) => {
+ networkStore.login(values.email, values.password);
+ },
+ });
 
-          <div className="mb-4">
-            <label className="form-label visually-hidden-focusable">Пароль</label>
-            <div className="input-group auth-pass-inputgroup">
-              <input
-                type="password"
-                name="password"
-                className="form-control form-control-lg"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-                placeholder="Введите пароль"
-              />
-              {formik.touched.password && formik.errors.password ? (
-                <div className="invalid-feedback d-block">{formik.errors.password}</div>
-              ) : null}
-            </div>
-          </div>
+ return (
+ <div className="m-auto col-md-8 col-lg-6 col-xl-5 card overflow-hidden">
+ <div className="bg-primary bg-soft p-4">
+ <h5 className="text-white">Добро пожаловать!</h5>
+ <p className="text-white">Войдите в систему для работы.</p>
+ </div>
 
-          <div className="pt-2 d-grid">
-            <button className="btn-primary btn-lg btn waves-effect waves-light" type="submit">Войти</button>
-          </div>
+ <div className="card-body pt-0">
+ <Link to={ ROUTES_LINKS.MAIN } className="auth-logo avatar-md profile-user-wid mb-3 avatar-title rounded-circle">
+ <img src={ logo } alt="" className="rounded-circle"/>
+ </Link>
 
-          <div className="mt-4 text-center">
-            <Link to={ ROUTES_LINKS.FORGOT } className="text-muted">
-              <i className="mdi mdi-lock me-1"></i> { PAGE_NAMES.FORGOT }
-            </Link>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-};
+ <form className="p-2 form-horizontal" onSubmit={ formik.handleSubmit }>
+ <div className="mb-4">
+ <label htmlFor="login" className="form-label visually-hidden-focusable">Логин</label>
+ <input
+ type="email"
+ name="email"
+ className="form-control form-control-lg"
+ id="login"
+ onChange={formik.handleChange}
+ onBlur={formik.handleBlur}
+ value={formik.values.email}
+ placeholder="Ваш email в системе"
+ />
+ {formik.touched.email && formik.errors.email ? (
+ <div className="invalid-feedback d-block">{formik.errors.email}</div>
+ ) : null}
+ </div>
 
-export default observer(LoginForm);
+ <div className="mb-4">
+ <label className="form-label visually-hidden-focusable">Пароль</label>
+ <div className="input-group auth-pass-inputgroup">
+ <input
+ type="password"
+ name="password"
+ className="form-control form-control-lg"
+ onChange={formik.handleChange}
+ onBlur={formik.handleBlur}
+ value={formik.values.password}
+ placeholder="Введите пароль"
+ />
+ {formik.touched.password && formik.errors.password ? (
+ <div className="invalid-feedback d-block">{formik.errors.password}</div>
+ ) : null}
+ </div>
+ </div>
+
+ <div className="pt-2 d-grid">
+ <button className="btn-primary btn-lg btn waves-effect waves-light" type="submit">Войти</button>
+ </div>
+
+ <div className="mt-4 text-center">
+ <Link to={ ROUTES_LINKS.FORGOT } className="text-muted">
+ <i className="mdi mdi-lock me-1"></i> { PAGE_NAMES.FORGOT }
+ </Link>
+ </div>
+ </form>
+ </div>
+ </div>
+ );
+ };
+
+ export default observer(LoginForm);
+ */

@@ -1,23 +1,23 @@
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { registrationSchema } from '../helpers/validationSchemas';
-import { useStores } from '../store';
+import UserStore from '../store/UserStore';
 import { PAGE_NAMES, ROUTES_LINKS } from './routesLinks';
 
 const RegistrationForm = () => {
-  const { networkStore } = useStores();
-  const initialValues = { displayName: '', email: '', password: '' }
+  const initialValues = { displayName: '', email: '', password: '' };
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: registrationSchema,
     onSubmit: async (values) => {
       try {
-        await networkStore.registration(values);
-        formik.resetForm();
+        await UserStore.register(values)
+        formik.resetForm()
         console.log('try');
-      } catch (e) {
-        console.log('async e', e);
+      } catch (error) {
+        console.log('async error', error)
       }
     },
   });
@@ -30,12 +30,10 @@ const RegistrationForm = () => {
             <label htmlFor="displayName" className="form-label visually-hidden-focusable">ФИО</label>
             <input
               type="text"
-              name="displayName"
-              className="form-control form-control-lg"
               id="displayName"
+              className="form-control form-control-lg"
               placeholder="ФИО"
-              onChange={ formik.handleChange }
-              value={ formik.values.displayName }
+              { ...formik.getFieldProps('displayName') }
             />
           </div>
 
@@ -43,12 +41,10 @@ const RegistrationForm = () => {
             <label htmlFor="email" className="form-label visually-hidden-focusable">Логин</label>
             <input
               type="email"
-              name="email"
-              className="form-control form-control-lg"
               id="email"
+              className="form-control form-control-lg"
               placeholder="Ваш email в системе"
-              onChange={ formik.handleChange }
-              value={ formik.values.email }
+              { ...formik.getFieldProps('email') }
             />
             { formik.errors.email && formik.touched.email && (
               <div className="invalid-feedback d-block">{ formik.errors.email }</div>
@@ -59,12 +55,10 @@ const RegistrationForm = () => {
             <label htmlFor="password" className="form-label visually-hidden-focusable">Пароль</label>
             <input
               type="password"
-              name="password"
               id="password"
               className="form-control form-control-lg"
               placeholder="Введите пароль"
-              onChange={ formik.handleChange }
-              value={ formik.values.password }
+              { ...formik.getFieldProps('password') }
             />
             { formik.errors.password && formik.touched.password && (
               <div className="invalid-feedback d-block">{ formik.errors.password }</div>
@@ -72,7 +66,7 @@ const RegistrationForm = () => {
           </div>
 
           <div className="pt-2 d-grid">
-            <button type="submit" className="btn-primary btn-lg btn waves-effect waves-light">Войти</button>
+            <button type="submit" className="btn-primary btn-lg btn waves-effect waves-light">Register</button>
           </div>
 
           <div className="mt-4 text-center">

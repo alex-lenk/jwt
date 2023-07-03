@@ -13,6 +13,7 @@ class NetworkStore {
   isLoading = false;
   users: IUser[] = [];
   menuIsActive = false;
+  tokens = {};
 
   constructor() {
     makeAutoObservable(this);
@@ -69,6 +70,7 @@ class NetworkStore {
     try {
       const response = await AuthService.registration(userCredentials);
       this.setUser(response.data.user);
+      this.tokens = response.data.tokens;
       toast.success('Пользователь успешно зарегистрирован');
     } catch (e: any) {
       console.error(e);

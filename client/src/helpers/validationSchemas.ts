@@ -15,7 +15,6 @@ export const registrationSchema = Yup.object().shape({
     .required('Обязательно!'),
 });
 
-
 export const validationSchema = Yup.object({
   email: Yup.string()
     .email('Некорректный email')
