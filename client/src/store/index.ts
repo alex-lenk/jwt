@@ -11,6 +11,8 @@ export class rootStore {
 
 export const rootStores = new rootStore();
 
-export const StoreProvider = createContext(rootStores).Provider;
+const StoreContext = createContext(rootStores);
 
-export const useStores = () => useContext(createContext(rootStores));
+export const StoreProvider = StoreContext.Provider;
+
+export const useStores = () => useContext(StoreContext);

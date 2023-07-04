@@ -2,10 +2,11 @@ import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { registrationSchema } from '../helpers/validationSchemas';
-import UserStore from '../store/UserStore';
 import { PAGE_NAMES, ROUTES_LINKS } from './routesLinks';
+import { useStores } from '../store';
 
 const RegistrationForm = () => {
+  const { networkStore } = useStores();
   const initialValues = { displayName: '', email: '', password: '' };
 
   const formik = useFormik({
@@ -13,7 +14,7 @@ const RegistrationForm = () => {
     validationSchema: registrationSchema,
     onSubmit: async (values) => {
       try {
-        await UserStore.register(values)
+        await networkStore.register(values)
         formik.resetForm()
         console.log('try');
       } catch (error) {

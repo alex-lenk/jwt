@@ -1,26 +1,22 @@
-import type { AxiosResponse } from 'axios';
-import type { AuthResponse } from '../models/response/AuthResponse';
-import $api from '../http';
+import axios from 'axios';
 
-export default class AuthService {
-  static async login(
-    email: string,
-    password: string,
-  ): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>('/login', { email, password });
-  }
+const api = axios.create({
+  baseURL: 'http://localhost:5000/v1',
+});
 
-  static async refresh(
-    withCredentials: object,
-  ): Promise<AxiosResponse<AuthResponse>> {
-    return $api.get<AuthResponse>('/refresh', withCredentials);
-  }
+export const registerUser = async (userCredentials: object) => {
+  const response = await api.post('/auth/register', userCredentials);
+  return response.data;
+};
 
-  static async registration(userCredentials: object): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>('/auth/register', userCredentials);
-  }
+export const loginUser = async (email: string, password: string) => {
+  const response = await api.post('/auth/login', { email, password });
+  return response.data;
+};
 
-  static async logout(): Promise<void> {
-    return $api.post('/logout');
-  }
-}
+export const getUserInfo = async (token: string) => {
+  const response = await api.get('/user', {
+    headers: { Authorization: `Bearer ${ token }` },
+  });
+  return response.data;
+};

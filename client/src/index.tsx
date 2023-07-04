@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { StoreProvider, rootStores } from './store';
@@ -11,13 +10,11 @@ const root = createRoot(
 );
 
 root.render(
-  <StrictMode>
-    <BrowserRouter>
-      <StoreProvider value={ rootStores }>
-        <ErrorBoundary>
-          <App/>
-        </ErrorBoundary>
-      </StoreProvider>
-    </BrowserRouter>
-  </StrictMode>,
+  <BrowserRouter>
+    <StoreProvider value={ rootStores }>
+      <ErrorBoundary>
+        <App/>
+      </ErrorBoundary>
+    </StoreProvider>
+  </BrowserRouter>,
 );
